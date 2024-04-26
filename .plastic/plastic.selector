@@ -1,0 +1,4 @@
+repository "FishBoneGame@FishBoneGame@cloud"
+  path "/"
+    br "/main"
+    co "/main"
