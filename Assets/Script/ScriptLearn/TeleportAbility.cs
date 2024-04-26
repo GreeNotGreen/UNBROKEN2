@@ -29,9 +29,11 @@ public class TeleportAbility : MonoBehaviour
 
     void TeleportToNearestEnemy()
     {
+
         GameObject nearestEnemy = FindNearestEnemy();
         if (nearestEnemy != null)
         {
+
             StartCoroutine(ResetTeleportingState());
             float distanceToNearestEnemy = Vector3.Distance(transform.position, nearestEnemy.transform.position);
             if (distanceToNearestEnemy <= maxDistanceForTeleport)

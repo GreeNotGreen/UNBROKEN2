@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         // 生成敌人的位置在生成器位置附近随机
-        Vector3 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
+        Vector2 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
 
         // 实例化敌人
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);

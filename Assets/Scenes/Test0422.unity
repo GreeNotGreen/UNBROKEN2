@@ -9614,10 +9614,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 371432127}
-    - target: {fileID: 3018362888333256911, guid: 8f6c2e1e38cdeb34e880ed569589209d, type: 3}
-      propertyPath: randomWalkInterval
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5414149007542632845, guid: 8f6c2e1e38cdeb34e880ed569589209d, type: 3}
       propertyPath: m_Name
       value: Enemy02 (1)

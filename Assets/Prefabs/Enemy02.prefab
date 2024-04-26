@@ -342,10 +342,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79335e02e8f5ed04bb028c4897945e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 277427537619670103, guid: 70279a3b1a5530e43b62193c0e2b1be5, type: 3}
+  player: {fileID: 0}
   speed: 3
   distanceBetween: 0
-  randomWalkInterval: 2
+  randomWalkInterval: 3
   spriteRenderer: {fileID: 3425928308538995574}
 --- !u!114 &7842576868892271120
 MonoBehaviour:
