@@ -6,19 +6,33 @@ public class EnemyAttack : MonoBehaviour
     public GameObject attackArea;
     public GameObject attackTrigger;
     public AI_Chase2 aiChaseScript; // 引用 AI_Chase2 脚本
+    private GameObject player; // 引用 AI_Chase2 脚本中的玩家对象
 
     public float timeBeforeAttack = 1f; // 攻击前等待时间
-    public float attackDuration = 0.5f; // 攻击持续时间
+    public float SetattackDuration = 0.5f; // Set攻击持续时间
     public float attackCooldown = 1f; // 攻击冷却时间
 
+    private float attackDuration = 0f; // 攻击持续时间
     private bool isAttacking = false;
     private bool isOnCooldown = false;
+
+    //for rush on player
+    public bool canRush = false;
+    public float rushSpeed = 5f;
+    private Vector3 playerPositionOnRush;
 
     private void Start()
     {
         // 确保攻击区域初始处于关闭状态
         attackArea.SetActive(false);
+        // 获取 AI_Chase2 脚本中的玩家对象
+        if (aiChaseScript != null)
+        {
+            player = aiChaseScript.player;
+        }
+        attackDuration = SetattackDuration;
     }
+
 
     private void Update()
     {
@@ -49,6 +63,10 @@ public class EnemyAttack : MonoBehaviour
         // 只有在攻击不在冷却状态时才能启动攻击
         if (attackTrigger.GetComponent<AttackTrigger>().OnTrigger && !isAttacking && !isOnCooldown)
         {
+            //get player position
+            playerPositionOnRush = player.transform.position;
+            Debug.Log("player position get");
+
             StartCoroutine(AttackRoutine());
         }
     }
@@ -67,6 +85,7 @@ public class EnemyAttack : MonoBehaviour
 
         // 等待攻击前的延迟时间
         yield return new WaitForSeconds(timeBeforeAttack);
+       
         // 开始攻击
         StartAttack();
     }
@@ -76,12 +95,19 @@ public class EnemyAttack : MonoBehaviour
         // 激活攻击区域
         attackArea.SetActive(true);
         // 重置攻击持续时间
-        attackDuration = 1f;
+        attackDuration = SetattackDuration;
         isAttacking = true;
+
+        if (canRush && player != null)
+        {
+            // 直接冲向玩家
+            transform.position = Vector3.MoveTowards(transform.position, playerPositionOnRush, rushSpeed *10* Time.deltaTime);
+        }
     }
 
     private void StopAttack()
     {
+
         // 关闭攻击区域
         attackArea.SetActive(false);
         // 启用 AI 追踪行为

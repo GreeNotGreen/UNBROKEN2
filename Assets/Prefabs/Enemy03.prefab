@@ -67,7 +67,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 3
 --- !u!114 &8562172722866027661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,5 +607,7 @@ MonoBehaviour:
   attackTrigger: {fileID: 1081069566975693795}
   aiChaseScript: {fileID: 8675705242626782971}
   timeBeforeAttack: 0.5
-  attackDuration: 0.25
+  SetattackDuration: 2
   attackCooldown: 1
+  canRush: 0
+  rushSpeed: 5

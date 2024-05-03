@@ -6,7 +6,6 @@ public class AI_Chase2 : MonoBehaviour
     public float speed = 3f; // 追踪速度
     public float distanceBetween = 5f; // 与玩家保持的距离
     public float randomWalkInterval = 2f; // 随机走动间隔
-
     private float lastRandomWalkTime; // 上次随机走动时间
     private Vector2 randomDirection; // 随机移动方向
     [SerializeField]   private SpriteRenderer spriteRenderer; // 精灵渲染器
@@ -59,13 +58,12 @@ public class AI_Chase2 : MonoBehaviour
                 if (player.transform.position.x < transform.position.x)
                 {
                     spriteRenderer.flipX = true;
-                    Debug.Log("flipx");
                 }
                 else
                 {
                     spriteRenderer.flipX = false;
-                    Debug.Log("flipx2");
                 }
+
             }
         }
     }

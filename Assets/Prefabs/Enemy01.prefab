@@ -202,7 +202,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 3
 --- !u!114 &6958495602296442786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79335e02e8f5ed04bb028c4897945e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 277427537619670103, guid: 70279a3b1a5530e43b62193c0e2b1be5, type: 3}
+  player: {fileID: 0}
   speed: 3
   distanceBetween: 10
   randomWalkInterval: 2
@@ -522,9 +522,11 @@ MonoBehaviour:
   attackArea: {fileID: 2313294632367096314}
   attackTrigger: {fileID: 2440422043736811466}
   aiChaseScript: {fileID: 197566542361899914}
-  timeBeforeAttack: 0.5
-  attackDuration: 0.25
+  timeBeforeAttack: 1
+  SetattackDuration: 1
   attackCooldown: 1
+  canRush: 1
+  rushSpeed: 2
 --- !u!1 &8726830572458542410
 GameObject:
   m_ObjectHideFlags: 0

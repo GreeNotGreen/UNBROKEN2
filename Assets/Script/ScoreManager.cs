@@ -64,6 +64,30 @@ public class ScoreManager : MonoBehaviour
         // 初始化 UI Text 对象的显示
         UpdateUIText();
         initialAlpha = beatGetText.color.a; // 记录初始透明度
+
+
+        //读取bpm （for combo use)
+        BeatManager beatManager = FindObjectOfType<BeatManager>();
+        if (beatManager != null)
+        {
+            if(beatManager._bpm > 150)
+            {
+                comboTimerMax += 0.5f;
+            }
+            else if (beatManager._bpm > 120)
+            {
+                comboTimerMax += 1.0f;
+            }
+            else if (beatManager._bpm > 90)
+            {
+                comboTimerMax += 1.5f;
+            }
+            else
+            {
+                comboTimerMax += 2f;
+
+            }
+        }
     }
 
     void Update()

@@ -6,6 +6,7 @@ public class Cam_Shake : MonoBehaviour
 {
     private PlayerAttack2 playerAttack;
 
+    public bool forPlayerAttack;
     // 抖动的幅度
     public float shakeAmount = 0.1f;
     // 抖动的持续时间
@@ -22,20 +23,32 @@ public class Cam_Shake : MonoBehaviour
 
     void Update()
     {
-        // 检查玩家的攻击状态，并在攻击时执行屏幕抖动
-        if (playerAttack != null && playerAttack.attacking)
+        // 检查玩家的攻击状态，并在攻击时执行屏幕抖动 
+        if (playerAttack != null && playerAttack.attacking && forPlayerAttack)
         {
             ShakeScreen();
         }
+
     }
 
-    void ShakeScreen()
+    public void ShakeScreen()
     {
-        // 记录当前相机位置作为抖动的起始位置
+        // 调用默认程度的抖动方法
+        ShakeScreen(shakeAmount);
+    }
+
+    public void ShakeScreenStrong()
+    {
+        // 调用更强烈程度的抖动方法
+        ShakeScreen(shakeAmount*3);
+    }
+
+    void ShakeScreen(float amount)
+    {
         originalPosition = transform.position;
 
         // 生成一个随机的偏移量
-        Vector3 shakeOffset = Random.insideUnitSphere * shakeAmount;
+        Vector3 shakeOffset = Random.insideUnitSphere * amount;
 
         // 将相机位置设置为起始位置加上偏移量
         transform.position = originalPosition + shakeOffset;
@@ -50,4 +63,6 @@ public class Cam_Shake : MonoBehaviour
         // 将相机位置恢复为起始位置
         transform.position = originalPosition;
     }
+
+    
 }

@@ -2668,8 +2668,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f6e21b475b313479f4fa124222b450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forPlayerAttack: 0
   shakeAmount: 0.7
   shakeDuration: 0.05
+--- !u!1 &619758185 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 277427537619670103, guid: 70279a3b1a5530e43b62193c0e2b1be5, type: 3}
+  m_PrefabInstance: {fileID: 7565826372559746109}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &626587736
 GameObject:
   m_ObjectHideFlags: 0
@@ -5111,7 +5117,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 084fd570f4880964fb487d82f34a6d2c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2d06a48ee2671ab40b1a9fc0918e4379, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
@@ -5209,7 +5215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483513584ec04514b9541e8fa63a5f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bpm: 188
+  _bpm: 128
   _audioSource: {fileID: 1205487781}
   _intervals:
   - _steps: 0.25
@@ -5228,6 +5234,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 519420034}
+          m_TargetAssemblyTypeName: Cam_Shake, Assembly-CSharp
+          m_MethodName: ShakeScreenStrong
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - _steps: 0.5
     _trigger:
       m_PersistentCalls:
@@ -5235,6 +5253,18 @@ MonoBehaviour:
         - m_Target: {fileID: 719438319}
           m_TargetAssemblyTypeName: PulseToTheBeat, Assembly-CSharp
           m_MethodName: Pulse2
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 519420034}
+          m_TargetAssemblyTypeName: Cam_Shake, Assembly-CSharp
+          m_MethodName: ShakeScreen
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5272,6 +5302,71 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1001 &1256669136
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 197566542361899914, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 619758185}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.1642885
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.1670077
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561070263338631866, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5491820297240606209, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 619758185}
+    - target: {fileID: 6952554388920736456, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
+      propertyPath: m_Name
+      value: Enemy01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b67a2f85527dea44a98f9df4b100b4cb, type: 3}
 --- !u!1 &1281293154
 GameObject:
   m_ObjectHideFlags: 0
@@ -9303,3 +9398,4 @@ SceneRoots:
   - {fileID: 7565826372559746109}
   - {fileID: 768267742}
   - {fileID: 642815332}
+  - {fileID: 1256669136}
