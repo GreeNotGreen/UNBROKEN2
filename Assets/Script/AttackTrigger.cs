@@ -33,10 +33,7 @@ public class AttackTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (OnTrigger)
-        {
-            Debug.Log("Ontrigger");
-        }
+       
     }
 
     IEnumerator StopKnockback(Rigidbody2D rigidbody)

@@ -2,8 +2,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//因为这个script 是 player跟 enemy 共用的    需要小心写player的时候 加上 forPlayerOnly
+
 public class Health : MonoBehaviour
 {
+    [SerializeField] private bool forPlayerOnly = false;
+
     public int health = 0;
     public int _maxHealth = 0;
     [SerializeField] private Text healthUI;
@@ -15,7 +19,17 @@ public class Health : MonoBehaviour
     private Color originalColor; // 原始颜色
     private bool isBlinking = false; // 是否正在闪烁
 
-    // Start is called before the first frame update
+    //for hurt screen && heal screen
+    [SerializeField] private Image hurtScreen;
+    [SerializeField] private Image healScreen;
+    //for last chance
+    public bool isLastChance = false;
+    [SerializeField] private Image LastChanceScreen;
+
+    //for blood particle
+    [SerializeField] private ParticleSystem bloodParticle;
+
+
     void Start()
     {
         originalColor = spriteRenderer.color; // 保存原始颜色
@@ -33,6 +47,21 @@ public class Health : MonoBehaviour
         if (isInvulnerable && !isBlinking)
         {
             StartCoroutine(BlinkRoutine());
+        }
+
+        if (forPlayerOnly)
+        {
+            if (isLastChance)
+            {
+                //last chance screen有特效
+                LastChanceScreen.gameObject.SetActive(true);
+            }
+            //如果超过10 last chance = false;
+            if (health >= 10)
+            {
+                isLastChance = false;
+                LastChanceScreen.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -73,14 +102,60 @@ public class Health : MonoBehaviour
         if (!isInvulnerable) // 如果不是无敌状态
         {
             this.health -= amount;
+            if(bloodParticle != null)
+                bloodParticle.Play();
 
-            if (health <= 0)
+            // player Use
+            if (forPlayerOnly)
             {
-                Die();
+                if (health <= 0 && !isLastChance)
+                {
+                    Debug.Log("islasthit = true");
+                    //last chance (hp =1)
+                    isLastChance = true;
+                    health = 1;
+                }
+                else if (health <= 0 && isLastChance)
+                {
+                    Debug.Log("die");
+                    Die();
+                }
+                else
+                {
+                    Debug.Log("hurt");
+                    if (hurtScreen != null)
+                    {
+                        hurtScreen.gameObject.SetActive(true);
+                        // 使用 LeanTween 补间 alpha 值从 1 到 0，在 1 秒内完成
+                        LeanTween.value(hurtScreen.gameObject, 1f, 0f, 1f)
+                            .setOnUpdate((float alpha) =>
+                            {
+                                // 在补间过程中更新 alpha 值
+                                Color screenColor = hurtScreen.color;
+                                screenColor.a = alpha;
+                                hurtScreen.color = screenColor;
+                            })
+                            .setOnComplete(() =>
+                            {
+                                // 补间完成后禁用 hurtScreen
+                                hurtScreen.gameObject.SetActive(false);
+                            });
+                    }
+                    StartCoroutine(InvulnerabilityRoutine()); // 启动无敌协程
+                }
             }
+
+            //enemy Use
             else
             {
-                StartCoroutine(InvulnerabilityRoutine()); // 启动无敌协程
+                if (health <= 0)
+                {
+                    Die();
+                }
+                else
+                {
+                    StartCoroutine(InvulnerabilityRoutine()); // 启动无敌协程
+                }
             }
         }
     }
@@ -91,7 +166,6 @@ public class Health : MonoBehaviour
 
         // 等待无敌持续时间
         yield return new WaitForSeconds(invulnerabilityDuration);
-
         // 取消无敌状态
         isInvulnerable = false;
     }
@@ -112,7 +186,28 @@ public class Health : MonoBehaviour
         else
         {
             this.health += amount;
+
+            Debug.Log("heal");
+            if (healScreen != null)
+            {
+                healScreen.gameObject.SetActive(true);
+                // 使用 LeanTween 补间 alpha 值从 1 到 0，在 1 秒内完成
+                LeanTween.value(healScreen.gameObject, 1f, 0f, 1f)
+                    .setOnUpdate((float alpha) =>
+                    {
+                        // 在补间过程中更新 alpha 值
+                        Color screenColor = healScreen.color;
+                        screenColor.a = alpha;
+                        healScreen.color = screenColor;
+                    })
+                    .setOnComplete(() =>
+                    {
+                        // 补间完成后禁用 hurtScreen
+                        healScreen.gameObject.SetActive(false);
+                    });
+            }
         }
+        
 
     }
 

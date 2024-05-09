@@ -63,10 +63,11 @@ public class EnemyAttack : MonoBehaviour
         // 只有在攻击不在冷却状态时才能启动攻击
         if (attackTrigger.GetComponent<AttackTrigger>().OnTrigger && !isAttacking && !isOnCooldown)
         {
-            //get player position
-            playerPositionOnRush = player.transform.position;
-            Debug.Log("player position get");
-
+            if(player != null)
+            {   
+                //get player position
+                playerPositionOnRush = player.transform.position;
+            }
             StartCoroutine(AttackRoutine());
         }
     }
